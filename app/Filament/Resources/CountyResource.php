@@ -52,7 +52,8 @@ class CountyResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -74,8 +75,8 @@ class CountyResource extends Resource
     {
         return [
             'index' => Pages\ListCounties::route('/'),
-            'create' => Pages\CreateCounty::route('/create'),
-            'edit' => Pages\EditCounty::route('/{record}/edit'),
+            // 'create' => Pages\CreateCounty::route('/create'),
+            // 'edit' => Pages\EditCounty::route('/{record}/edit'),
         ];
     }
 
