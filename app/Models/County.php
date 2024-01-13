@@ -19,6 +19,10 @@ class County extends Model
         return $this->hasMany(Constituency::class);
     }
 
+    public function wards(): HasMany {
+        return $this->hasMany(Ward::class);
+    }
+
     public static function getForm(): array {
         return [
             TextInput::make('county')

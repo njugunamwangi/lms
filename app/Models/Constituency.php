@@ -7,6 +7,7 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Constituency extends Model
@@ -18,6 +19,10 @@ class Constituency extends Model
 
     public function county(): BelongsTo {
         return $this->belongsTo(County::class);
+    }
+
+    public function wards(): HasMany {
+        return $this->hasMany(Ward::class);
     }
 
     public static function getForm(): array {
