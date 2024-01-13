@@ -10,6 +10,10 @@
             <title>{{ config('app.name') }}</title>
         @endif
 
+        <style>
+            [x-cloak] { display: none; }
+        </style>
+
         <!-- Favicon -->
 		<link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
 
