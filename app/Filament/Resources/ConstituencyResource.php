@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CountyResource\Pages;
-use App\Filament\Resources\CountyResource\RelationManagers;
-use App\Models\County;
+use App\Filament\Resources\ConstituencyResource\Pages;
+use App\Filament\Resources\ConstituencyResource\RelationManagers;
+use App\Models\Constituency;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,28 +13,29 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CountyResource extends Resource
+class ConstituencyResource extends Resource
 {
-    protected static ?string $model = County::class;
+    protected static ?string $model = Constituency::class;
 
     protected static ?string $navigationGroup = 'Locations';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(County::getForm());
+            ->schema(Constituency::getForm());
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('county')
+                Tables\Columns\TextColumn::make('constituency')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('county_code')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('county.county')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
@@ -52,7 +53,8 @@ class CountyResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -73,9 +75,9 @@ class CountyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCounties::route('/'),
-            'create' => Pages\CreateCounty::route('/create'),
-            'edit' => Pages\EditCounty::route('/{record}/edit'),
+            'index' => Pages\ListConstituencies::route('/'),
+            // 'create' => Pages\CreateConstituency::route('/create'),
+            // 'edit' => Pages\EditConstituency::route('/{record}/edit'),
         ];
     }
 
