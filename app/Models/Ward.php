@@ -2,9 +2,15 @@
 
 namespace App\Models;
 
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Get;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ward extends Model
@@ -21,6 +27,11 @@ class Ward extends Model
     public function constituency(): BelongsTo {
         return $this->belongsTo(Constituency::class);
     }
+
+    public function schools(): HasMany {
+        return $this->hasMany(School::class);
+    }
+
 
     public static function getForm(): array {
         return [
