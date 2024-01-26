@@ -28,33 +28,7 @@ class WardResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('ward')
-                    ->required()
-                    ->columnSpanFull()
-                    ->maxLength(255),
-                Grid::make(2)
-                    ->schema([
-                        Forms\Components\Select::make('county_id')
-                            ->relationship('county', 'county')
-                            ->searchable()
-                            ->preload()
-                            ->live()
-                            ->createOptionForm(County::getForm())
-                            ->editOptionForm(County::getForm())
-                            ->required(),
-                        Forms\Components\Select::make('constituency_id')
-                            ->relationship('constituency', 'constituency', modifyQueryUsing: function(Builder $query, Get $get) {
-                                return $query->where('county_id', $get('county_id'));
-                            })
-                            ->searchable()
-                            ->preload()
-                            ->createOptionForm(Constituency::getForm())
-                            ->editOptionForm(Constituency::getForm())
-                            ->required(),
-                    ])
-
-            ]);
+            ->schema(Ward::getForm());
     }
 
     public static function table(Table $table): Table
