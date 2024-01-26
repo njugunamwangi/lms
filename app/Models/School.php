@@ -1,3 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use App\Observers\SchoolObserver;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Get;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class School extends Model
+{
+    use HasFactory;
+
+    protected $guarded = [];
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
+    }
+
+    public function county(): BelongsTo {
+        return $this->belongsTo(County::class);
+    }
+
+    public function constituency(): BelongsTo {
+        return $this->belongsTo(Constituency::class);
+    }
+
+    public function ward(): BelongsTo {
+        return $this->belongsTo(Ward::class);
+    }
 
     public static function getForm(): array {
         return [
@@ -48,3 +83,4 @@
 
         self::observe(SchoolObserver::class);
     }
+}
