@@ -25,6 +25,10 @@ class Constituency extends Model
         return $this->hasMany(Ward::class);
     }
 
+    public function schools(): HasMany {
+        return $this->hasMany(School::class);
+    }
+
     public static function getForm(): array {
         return [
             TextInput::make('constituency')
